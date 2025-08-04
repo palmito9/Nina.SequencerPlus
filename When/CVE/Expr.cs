@@ -509,6 +509,12 @@ namespace WhenPlugin.When {
                 } else if (name == "strConcat") {
                     var e = args.Parameters[0].Evaluate();
                     var i = args.Parameters[1].Evaluate();
+                    if (!(e is string)) {
+                        e = e.ToString();
+                    }
+                    if (!(i is string)) {
+                        i = i.ToString();
+                    }
                     if (e is string es && i is string iss) {
                         args.Result = String.Concat(es, iss);
                     } else {
