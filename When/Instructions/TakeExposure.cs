@@ -447,9 +447,10 @@ namespace WhenPlugin.When {
 
         public void ValidateGain(Expr expr) {
             CameraInfo = this.cameraMediator.GetInfo();
-            if (!CameraInfo.Connected) {
-                expr.Error = Loc.Instance["LblCameraNotConnected"];
-            } else if (expr.Value < -1) {
+            //if (!CameraInfo.Connected) {
+            //    expr.Error = Loc.Instance["LblCameraNotConnected"];
+            //} else 
+            if (expr.Value < -1) {
                 expr.Error = "Cannot be less than -1";
             } else if (CameraInfo.CanSetGain && expr.Value > -1 && (expr.Value < CameraInfo.GainMin || expr.Value > CameraInfo.GainMax)) {
                 expr.Error = string.Format("Must be between {0} and {1}", CameraInfo.GainMin, CameraInfo.GainMax);
@@ -458,9 +459,10 @@ namespace WhenPlugin.When {
 
         public void ValidateOffset(Expr expr) {
             CameraInfo = this.cameraMediator.GetInfo();
-            if (!CameraInfo.Connected) {
-                expr.Error = Loc.Instance["LblCameraNotConnected"];
-            } else if (expr.Value < 0) {
+            //if (!CameraInfo.Connected) {
+            //   expr.Error = Loc.Instance["LblCameraNotConnected"];
+            //} else 
+            if (expr.Value < 0) {
                 expr.Error = "Cannot be less than 0";
             } else if (CameraInfo.CanSetGain && expr.Value > -1 && (expr.Value < CameraInfo.GainMin || expr.Value > CameraInfo.GainMax)) {
                 expr.Error = string.Format("Must be between {0} and {1}", CameraInfo.OffsetMin, CameraInfo.OffsetMax);
