@@ -108,7 +108,12 @@ namespace WhenPlugin.When {
 
         public virtual double TimeToMeridianFlip {
             get {
-                return telescopeMediator.GetInfo().TimeToMeridianFlip;
+                DIYMeridianFlipTrigger diymf = FindTrigger();
+                if (diymf != null) {
+                    return diymf.TimeToMeridianFlip;
+                }
+                Logger.Error("Can't find DIYMF");
+                return 0;
             }
             set { }
         
@@ -175,7 +180,7 @@ namespace WhenPlugin.When {
             var i = new List<string>();
 
             if (!(IsInsideMeridianFlipEvent())) {
-                    return false;
+                return false;
             }
 
             var telescopeInfo = telescopeMediator.GetInfo();
