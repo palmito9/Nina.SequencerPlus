@@ -84,11 +84,11 @@ namespace WhenPlugin.When {
                 await targetContainer.Interrupt();
             }
 
-            foreach (var item in targetContainer.Items) {
-                item.Status = SequenceEntityStatus.FINISHED;
-            }
+            //foreach (var item in targetContainer.Items) {
+            //    item.Status = SequenceEntityStatus.FINISHED;
+            //}
 
-            sequenceNavigationVM.Sequence2VM.StartSequenceCommand.Execute(true);
+            //sequenceNavigationVM.Sequence2VM.StartSequenceCommand.Execute(true);
 
             return true;
         }
