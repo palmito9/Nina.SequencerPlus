@@ -239,7 +239,6 @@ namespace WhenPlugin.When {
 
         public override void ResetProgress() {
             base.ResetProgress();
-            Instructions.ResetAll();
             Status = NINA.Core.Enum.SequenceEntityStatus.DISABLED;
             ShowMenu = false;
         }
