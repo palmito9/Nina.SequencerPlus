@@ -275,7 +275,7 @@ namespace WhenPlugin.When {
             Logger.Trace("*When Interrupt*");
             if (!sequenceMediator.Initialized || !sequenceMediator.IsAdvancedSequenceRunning()) return;
             if (!Interrupt) return;
-            if (InFlight || Triggered) {
+            if (InFlight || Triggered || Critical) {
 
                 if (RunningItem != null) {
                     ISequenceContainer p = RunningItem.Parent;
@@ -288,7 +288,7 @@ namespace WhenPlugin.When {
                     }
                 }
 
-                Logger.Trace("InFlight or Triggered, return");
+                Logger.Trace("InFlight/Triggered/Critical, return");
                 return;
             }
 
@@ -319,7 +319,7 @@ namespace WhenPlugin.When {
                             Logger.Info("Delay 1000");
                             await Task.Delay(1000);
                         }
-                        Logger.Info("Sequence longer running");
+                        Logger.Info("Sequence no longer running");
                         CheckSlewing();
 
                     } finally {

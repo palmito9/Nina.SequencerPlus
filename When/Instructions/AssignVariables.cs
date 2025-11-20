@@ -68,7 +68,11 @@ namespace WhenPlugin.When {
             string v = fe.Variable;
             string le = fe.ListExpression;
 
-            if (fe.ValidateArguments() != null) {
+            string val = fe.ValidateArguments();
+            if (val != null) {
+                Logger.Error("Validation failed: " + val);
+                Logger.Error("Variable: " +  fe.Variable);
+                Logger.Error("ListExpression: " + fe.ListExpression);
                 throw new SequenceEntityFailedException("Syntax error in Variable/List Expression");
             }
 
