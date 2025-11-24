@@ -231,12 +231,17 @@ namespace WhenPlugin.When {
 
         ISequenceItem RunningItem = null;
 
+        private ISequenceContainer LoopTerminator;
+        
         private bool CanContinue(ISequenceContainer container, ISequenceItem previousItem, ISequenceItem nextItem) {
             var conditionable = container as IConditionable;
             var canContinue = false;
             var conditions = conditionable?.GetConditionsSnapshot()?.Where(x => x.Status != SequenceEntityStatus.DISABLED).ToList();
             if (conditions != null && conditions.Count > 0) {
                 canContinue = conditionable.CheckConditions(previousItem, nextItem);
+                if (!canContinue) {
+                    LoopTerminator = container;
+                }
             } else {
                 canContinue = container.Iterations < 1;
             }
@@ -273,16 +278,24 @@ namespace WhenPlugin.When {
 
         private async Task InterruptWhen() {
             Logger.Trace("*When Interrupt*");
-            if (!sequenceMediator.Initialized || !sequenceMediator.IsAdvancedSequenceRunning()) return;
+            if (!sequenceMediator.Initialized || !sequenceMediator.IsAdvancedSequenceRunning()) return; 
             if (!Interrupt) return;
             if (InFlight || Triggered || Critical) {
 
                 if (RunningItem != null) {
                     ISequenceContainer p = RunningItem.Parent;
                     if (p != null) {
+                        LoopTerminator = null;
                         if (!CanContinue(p, PreviousItem, NextItem)) {
-                            Logger.Info("Interrupted instruction's loop has terminated.  Stopping loop Parent");
-                            await p.Interrupt();
+                            Logger.Info("Interrupted instruction's loop has terminated.  Stopping WBU Parent, " + Parent);
+                            Parent.Interrupt();
+                            //if (LoopTerminator != null) {
+                            //    Logger.Info("Interrupted instruction's loop has terminated.  Stopping LoopTerminator, " + LoopTerminator);
+                            //    await LoopTerminator.Interrupt();
+                            //} else {
+                            //    Logger.Info("Interrupted instruction's loop has terminated.  Stopping loop Parent, " + p);
+                            //    await p.Interrupt();
+                            //}
                             return;
                         }
                     }
