@@ -50,6 +50,7 @@ namespace WhenPlugin.When {
             return clone;
         }
 
+        [JsonProperty]
         public SequentialContainer TriggerRunner { get; set; }
 
         private static object lockObj = new object();
@@ -94,15 +95,23 @@ namespace WhenPlugin.When {
                 TriggerRunner.Conditions[0].AfterParentChanged();
             }
         }
-        public virtual bool Validate() {
+        public bool Validate() {
+            IList<string> i = new List<string>();
             // Validate the Items (this will update their status)
             if (TriggerRunner == null) return true;
+            if (TriggerRunner.Conditions.Count == 0) {
+                i.Add("Relaxed Loop must contain a Condition");
+            }
             foreach (ISequenceCondition item in TriggerRunner.Conditions) {
                 if (item is IValidatable vitem) {
                     return vitem.Validate();
                 }
             }
-            return true;
+            if (TriggerRunner.Conditions.Count > 0 && TriggerRunner.Conditions[0] is LoopCondition) {
+                i.Add("Relaxed Loop cannot be used with Loop for Iterations");
+            }
+            Issues = i;
+            return Issues.Count == 0;
         }
         public override string ToString() {
             return $"Category: {Category}, Item: {nameof(LoopTrigger)}";
