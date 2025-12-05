@@ -4,6 +4,7 @@ using NINA.Core.Model;
 using NINA.Core.Utility;
 using NINA.Sequencer.Conditions;
 using NINA.Sequencer.Container;
+using NINA.Sequencer.Container.ExecutionStrategy;
 using NINA.Sequencer.DragDrop;
 using NINA.Sequencer.SequenceItem;
 using NINA.Sequencer.Trigger;
@@ -18,18 +19,19 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace WhenPlugin.When {
-    [ExportMetadata("Name", "Loop Trigger")]
+    [ExportMetadata("Name", "Relaxed Loop")]
     [ExportMetadata("Description", "This trigger will run the specified instructions when the underlying trigger is activated.")]
     [ExportMetadata("Icon", "WandSVG")]
     [ExportMetadata("Category", "Powerups (Misc)")]
-    [Export(typeof(ISequenceTrigger))]
+    [Export(typeof(ISequenceCondition))]
     [JsonObject(MemberSerialization.OptIn)]
-    public class LoopTrigger : SequenceTrigger, IValidatable {
+    public class LoopTrigger : SequenceCondition, IValidatable {
 
 
         [ImportingConstructor]
         public LoopTrigger() {
             DropIntoDIYTriggersCommand = new GalaSoft.MvvmLight.Command.RelayCommand<DropIntoParameters>(DropInSequenceTrigger);
+            TriggerRunner = new SequentialContainer();
         }
 
         public override bool AllowMultiplePerSet => true;
@@ -47,6 +49,8 @@ namespace WhenPlugin.When {
 
             return clone;
         }
+
+        public SequentialContainer TriggerRunner { get; set; }
 
         private static object lockObj = new object();
 
@@ -81,59 +85,6 @@ namespace WhenPlugin.When {
             }
         }
 
-        /// <summary>
-        /// The actual running logic for when the trigger should run
-        /// </summary>
-        /// <param name="context"></param>
-        /// <param name="progress"></param>
-        /// <param name="token"></param>
-        /// <returns></returns>
-        public override async Task Execute(ISequenceContainer context, IProgress<ApplicationStatus> progress, CancellationToken token) {
-            TriggerRunner.AttachNewParent(context);
-
-            try {
-                Parent.Interrupt();
-            } finally {
-                TriggerRunner.Parent?.Remove(TriggerRunner);
-                TriggerRunner.AttachNewParent(Parent);
-            }
-        }
-        public override bool ShouldTrigger(ISequenceItem previousItem, ISequenceItem nextItem) {
-            if (TriggerRunner.Conditions.FirstOrDefault() == null) return false;
-            var condition = TriggerRunner.Conditions.FirstOrDefault();
-            var result = !CanContinue(TriggerRunner, previousItem, nextItem);
-            if (result) {
-                Logger.Info("Loop Trigger " + condition.Name + " ShouldTrigger returning true");
-            }
-            return result;
-        }
-
-        public override bool ShouldTriggerAfter(ISequenceItem previousItem, ISequenceItem nextItem) {
-            if (TriggerRunner.Conditions.FirstOrDefault() == null) return false;
-            var condition = TriggerRunner.Conditions.FirstOrDefault();
-            var result = !CanContinue(TriggerRunner, previousItem, nextItem);
-            if (result) {
-                Logger.Info("Loop Trigger " + condition.Name + " ShouldTriggerAfter returning true");
-            }
-            return result;
-        }
-        private bool CanContinue(ISequenceContainer container, ISequenceItem previousItem, ISequenceItem nextItem) {
-            var conditionable = container as IConditionable;
-            var canContinue = false;
-            var conditions = conditionable?.GetConditionsSnapshot()?.Where(x => x.Status != SequenceEntityStatus.DISABLED).ToList();
-            if (conditions != null && conditions.Count > 0) {
-                canContinue = conditionable.CheckConditions(previousItem, nextItem);
-            } else {
-                canContinue = container.Iterations < 1;
-            }
-
-            if (container.Parent != null) {
-                canContinue = canContinue && CanContinue(container.Parent, previousItem, nextItem);
-            }
-
-            return canContinue;
-        }
-
         public override void AfterParentChanged() {
             foreach (ISequenceCondition item in TriggerRunner.Conditions) {
                 if (item.Parent == null) item.AttachNewParent(TriggerRunner);
@@ -148,13 +99,18 @@ namespace WhenPlugin.When {
             if (TriggerRunner == null) return true;
             foreach (ISequenceCondition item in TriggerRunner.Conditions) {
                 if (item is IValidatable vitem) {
-                    _ = vitem.Validate();
+                    return vitem.Validate();
                 }
             }
             return true;
         }
         public override string ToString() {
             return $"Category: {Category}, Item: {nameof(LoopTrigger)}";
+        }
+
+        public override bool Check(ISequenceItem previousItem, ISequenceItem nextItem) {
+            if (TriggerRunner.Conditions.Count == 0) return false;
+            return TriggerRunner.Conditions[0].RunCheck(previousItem, nextItem);
         }
     }
 }
