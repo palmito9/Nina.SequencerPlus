@@ -333,6 +333,9 @@ namespace WhenPlugin.When {
                             await Task.Delay(1000);
                         }
                         Logger.Info("Sequence no longer running");
+                        if (RunningItem != null) {
+                            RunningItem.Status = SequenceEntityStatus.FINISHED;
+                        }
                         CheckSlewing();
 
                     } finally {
