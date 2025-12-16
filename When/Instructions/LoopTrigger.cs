@@ -96,7 +96,7 @@ namespace WhenPlugin.When {
             }
         }
         public bool Validate() {
-            IList<string> i = new List<string>();
+            var i = new List<string>();
             // Validate the Items (this will update their status)
             if (TriggerRunner == null) return true;
             if (TriggerRunner.Conditions.Count == 0) {
@@ -104,7 +104,8 @@ namespace WhenPlugin.When {
             }
             foreach (ISequenceCondition item in TriggerRunner.Conditions) {
                 if (item is IValidatable vitem) {
-                    return vitem.Validate();
+                    vitem.Validate();
+                    i.AddRange(vitem.Issues);
                 }
             }
             if (TriggerRunner.Conditions.Count > 0 && TriggerRunner.Conditions[0] is LoopCondition) {

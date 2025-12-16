@@ -136,7 +136,7 @@ namespace WhenPlugin.When {
                 Logger.Trace("Check = FALSE");
                 return false;
             }
-            Logger.Trace("Check = TRUE");
+            Logger.Info("When Check = TRUE, Expr = " + IfExpr);
             return true;
         }
 
