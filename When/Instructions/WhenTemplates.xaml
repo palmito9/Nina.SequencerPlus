@@ -1285,7 +1285,7 @@
                         </Border>
                     </Grid>
                 </ninactrl:DetachingExpander.Header>
-                <StackPanel Grid.Row="1" Orientation="Vertical">
+                <VirtualizingStackPanel Grid.Row="1" Orientation="Vertical" VirtualizingPanel.IsVirtualizing="True">
                     <Border
                         MinHeight="35"
                         Margin="0,0,0,0"
@@ -1306,7 +1306,7 @@
                             </i:Interaction.Behaviors>
                         </Grid>
                     </Border>
-                </StackPanel>
+                </VirtualizingStackPanel>
             </ninactrl:DetachingExpander>
         </Border>
     </DataTemplate>
@@ -1379,7 +1379,7 @@
                         </Border>
                     </Grid>
                 </ninactrl:DetachingExpander.Header>
-                <StackPanel Grid.Row="1" Orientation="Vertical">
+                <VirtualizingStackPanel Grid.Row="1" Orientation="Vertical" VirtualizingPanel.IsVirtualizing="True">
                     <Border
                        MinHeight="35"
                        Margin="0,0,0,0"
@@ -1400,7 +1400,7 @@
                             </i:Interaction.Behaviors>
                         </Grid>
                     </Border>
-                </StackPanel>
+                </VirtualizingStackPanel>
             </ninactrl:DetachingExpander>
         </Border>
     </DataTemplate>
@@ -1481,7 +1481,7 @@
                         </Border>
                     </Grid>
                 </ninactrl:DetachingExpander.Header>
-                <StackPanel Grid.Row="1" Orientation="Vertical">
+                <VirtualizingStackPanel Grid.Row="1" Orientation="Vertical" VirtualizingPanel.IsVirtualizing="True">
                     <Border
                        MinHeight="35"
                        Margin="0,0,0,0"
@@ -1498,7 +1498,7 @@
                                Visibility="{Binding Items.Count, Converter={StaticResource InverseZeroToVisibilityConverter}}" />
                         </Grid>
                     </Border>
-                </StackPanel>
+                </VirtualizingStackPanel>
             </ninactrl:DetachingExpander>
         </Border>
     </DataTemplate>
@@ -2035,7 +2035,7 @@
                         </Border>
                     </Grid>
                 </ninactrl:DetachingExpander.Header>
-                <StackPanel Grid.Row="1" Orientation="Vertical">
+                <VirtualizingStackPanel Grid.Row="1" Orientation="Vertical" VirtualizingPanel.IsVirtualizing="True">
                     <Border
                       MinHeight="35"
                       Margin="0,0,0,0"
@@ -2056,7 +2056,7 @@
                             </i:Interaction.Behaviors>
                         </Grid>
                     </Border>
-                </StackPanel>
+                </VirtualizingStackPanel>
             </ninactrl:DetachingExpander>
         </Border>
     </DataTemplate>
@@ -2503,7 +2503,7 @@
 
                     </Grid>
                 </ninactrl:DetachingExpander.Header>
-                <StackPanel Grid.Row="1" Orientation="Vertical">
+                <VirtualizingStackPanel Grid.Row="1" Orientation="Vertical" VirtualizingPanel.IsVirtualizing="True">
                     <Border
                       MinHeight="35"
                       Margin="0,0,0,0"
@@ -2525,7 +2525,7 @@ WhenPlugin.When.SetVariable, WhenPlugin, Culture=neutral, PublicKeyToken=null;NI
                             </i:Interaction.Behaviors>
                         </Grid>
                     </Border>
-                </StackPanel>
+                </VirtualizingStackPanel>
             </ninactrl:DetachingExpander>
         </Border>
     </DataTemplate>
@@ -2605,7 +2605,7 @@ WhenPlugin.When.SetVariable, WhenPlugin, Culture=neutral, PublicKeyToken=null;NI
                         </Border>
                     </Grid>
                 </ninactrl:DetachingExpander.Header>
-                <StackPanel Grid.Row="1" Orientation="Vertical">
+                <VirtualizingStackPanel Grid.Row="1" Orientation="Vertical" VirtualizingPanel.IsVirtualizing="True">
                     <Border
                        MinHeight="35"
                        Margin="0,0,0,0"
@@ -2647,7 +2647,7 @@ WhenPlugin.When.SetVariable, WhenPlugin, Culture=neutral, PublicKeyToken=null;NI
                             </i:Interaction.Behaviors>
                         </Grid>
                     </Border>
-                </StackPanel>
+                </VirtualizingStackPanel>
             </ninactrl:DetachingExpander>
         </Border>
     </DataTemplate>
