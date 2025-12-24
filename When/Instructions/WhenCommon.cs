@@ -349,8 +349,6 @@ namespace WhenPlugin.When {
                         Logger.Info("Can't run When because Parent isn't in root container, " + Parent.Name);
                     } else if (Parent.Status != SequenceEntityStatus.RUNNING) {
                         Logger.Info("Can't run When because Parent is not running, " + Parent.Name + ": " + Parent.Status);
-                    } else {
-                        Logger.Info("Can't run when for some other reason: Disabled?");
                     }
                 }
             } else {
