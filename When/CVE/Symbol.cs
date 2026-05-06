@@ -422,9 +422,6 @@ namespace WhenPlugin.When {
                     Logger.Info("  -- " + d.Key + " / " + d.Value.ToString());
                 }
             }
-            foreach (var x in Symbol.GetSwitchWeatherKeys()) {
-                Logger.Info(x.Key + ": " + x.Value.ToString());
-            }
         }
 
          public static Symbol FindGlobalSymbol(string identifier) {

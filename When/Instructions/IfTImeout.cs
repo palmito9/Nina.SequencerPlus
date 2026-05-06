@@ -1,17 +1,18 @@
 ﻿using Newtonsoft.Json;
 using NINA.Core.Model;
+using NINA.Core.Utility;
+using NINA.Core.Utility.Notification;
+using NINA.Sequencer;
+using NINA.Sequencer.Conditions;
+using NINA.Sequencer.Container;
+using NINA.Sequencer.DragDrop;
 using NINA.Sequencer.SequenceItem;
+using NINA.Sequencer.Validations;
 using System;
 using System.ComponentModel.Composition;
 using System.Threading;
 using System.Threading.Tasks;
-using NINA.Sequencer.DragDrop;
 using System.Windows.Input;
-using NINA.Sequencer.Validations;
-using NINA.Sequencer.Conditions;
-using NINA.Core.Utility;
-using NINA.Core.Utility.Notification;
-using NINA.Sequencer;
 
 namespace WhenPlugin.When {
     [ExportMetadata("Name", "If Timed Out")]
@@ -155,7 +156,12 @@ namespace WhenPlugin.When {
                 if (parameters.Source is TemplatedSequenceContainer tsc) {
                     item = (ISequenceEntity)tsc.Clone();
                 } else {
-                    item = parameters.Source as ISequenceEntity;
+                    ISequenceContainer container = (ISequenceContainer)(object)((parameters.Source is ISequenceContainer) ? parameters.Source : null);
+                    if (container != null) {
+                        item = (ISequenceEntity)((ICloneable)container).Clone();
+                    } else {
+                        item = (ISequenceEntity)(object)((parameters.Source is ISequenceEntity) ? parameters.Source : null);
+                    }
                 }
 
                 ISequenceItem si = item as ISequenceItem;

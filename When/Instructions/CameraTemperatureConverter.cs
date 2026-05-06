@@ -13,6 +13,7 @@
 
 #endregion "copyright"
 
+using NINA.Core.Locale;
 using System;
 using System.Globalization;
 using System.Windows.Data;
@@ -22,10 +23,13 @@ namespace WhenPlugin.When {
     public class CameraTemperatureConverter : IValueConverter {
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture) {
-            if (System.Convert.ToInt32(value) == -1) {
-                return $"({NINA.Core.Locale.Loc.Instance["LblCamera"]})";
-            } else {
+            try {
+                if (System.Convert.ToInt32(value) == -1) {
+                    return "(" + Loc.Instance["LblCamera"] + ")";
+                }
                 return $"({value})";
+            } catch (Exception) {
+                return "(ERROR)";
             }
         }
 

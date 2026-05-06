@@ -149,13 +149,13 @@ namespace WhenPlugin.When {
                     Expr.AddExprIssues(i, OriginalExpr);
                 }
             }
-            if (Expr.Error != null) {
+            if (Expr != null && Expr.Error != null) {
                 Expr.AddExprIssues(i, Expr, OriginalExpr);
             }
 
 
 
-            if (Definition != Expr.Expression) {
+            if (Expr != null && Definition != Expr.Expression) {
                 Definition = Expr.Expression;
                 Logger.Info("Validate: Definition diverges from Expr; fixing");
             }

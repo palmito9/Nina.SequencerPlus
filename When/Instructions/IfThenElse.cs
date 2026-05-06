@@ -159,9 +159,6 @@ namespace WhenPlugin.When {
 
             Expr.AddExprIssues(i, IfExpr);
 
-            Switches = Symbol.GetSwitches();
-            RaisePropertyChanged("Switches");
-
             Issues = i;
             return i.Count == 0;
         }

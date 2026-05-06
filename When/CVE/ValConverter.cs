@@ -12,6 +12,7 @@
 
 #endregion "copyright"
 
+using NINA.Core.Utility;
 using NINA.Sequencer;
 using NINA.Sequencer.SequenceItem;
 using System;
@@ -19,6 +20,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
+using System.Windows;
 using System.Windows.Data;
 using System.Windows.Markup;
 using System.Windows.Media;
@@ -31,12 +33,24 @@ namespace WhenPlugin.When {
         private const int VALUE_EXPR = 0;              // The expression to be evaluated
         private const int VALUE_ERR = 1;
         public object Convert(object[] value, Type targetType, object parameter, CultureInfo culture) {
-            Expr expr = value[VALUE_EXPR] as Expr;
-            if (expr != null && expr.Error == null && expr.Value != 0) {
-                return new SolidColorBrush(Colors.GreenYellow);
-            }
-            if (expr != null && expr.Error != null && expr.Error.StartsWith("*")) {
-                return new SolidColorBrush(Colors.Yellow);
+            try {
+                if (value == null) {
+                    Logger.Warning("WTF? ValConverter got null value array.", "Convert", "C:\\Projects\\Powerups\\nina.plugin.when\\When\\CVE\\ValConverter.cs", 39);
+                    return new SolidColorBrush(Colors.Red);
+                }
+                object obj = value[0];
+                if (obj == null || object.Equals(obj, DependencyProperty.UnsetValue)) {
+                    return new SolidColorBrush(Colors.Red);
+                }
+                Expr expr = obj as Expr;
+                if (expr != null && expr.Error == null && expr.Value != 0.0) {
+                    return new SolidColorBrush(Colors.GreenYellow);
+                }
+                if (expr != null && expr.Error != null && expr.Error.StartsWith("*")) {
+                    return new SolidColorBrush(Colors.Yellow);
+                }
+            } catch (Exception ex) {
+                Logger.Error("ValConverter threw exception: " + ex, "Convert", "C:\\Projects\\Powerups\\nina.plugin.when\\When\\CVE\\ValConverter.cs", 54);
             }
             return new SolidColorBrush(Colors.Orange);
         }
