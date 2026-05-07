@@ -11,7 +11,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace WhenPlugin.When {
+namespace NINA.Plugin.SequencerPlus {
 
     [Export(typeof(ResourceDictionary))]
     partial class Options : ResourceDictionary {

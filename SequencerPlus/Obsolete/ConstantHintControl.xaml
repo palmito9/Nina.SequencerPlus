@@ -1,0 +1,63 @@
+﻿<UserControl x:Class="NINA.Plugin.SequencerPlus.ConstantHintControl"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:ninactrl="clr-namespace:NINA.CustomControlLibrary;assembly=NINA.CustomControlLibrary"
+        xmlns:local="clr-namespace:NINA.Plugin.SequencerPlus">
+        <UserControl.Resources>
+            <local:ExpressionConverter x:Key="ec" />
+            <local:ValidityConverter x:Key="vc" />
+        </UserControl.Resources>
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" >
+        <ninactrl:HintTextBox
+                MinWidth="40"
+                Margin="0,0,0,-5"
+                VerticalAlignment="Center"
+                HorizontalContentAlignment="Center"
+                VerticalContentAlignment="Center"
+                Foreground="{StaticResource PrimaryBrush}"
+                TextAlignment="Center"
+                ToolTip="Foo" 
+                ToolTipOpening="ShowConstants" >
+            <ninactrl:HintTextBox.HintText>
+                <Binding Mode="TwoWay" Path="Default" RelativeSource="{RelativeSource AncestorType={x:Type local:ConstantHintControl}}" />
+            </ninactrl:HintTextBox.HintText>
+            <ninactrl:HintTextBox.Text>
+                <Binding
+                        Mode="TwoWay"
+                        Path="Expr" RelativeSource="{RelativeSource AncestorType={x:Type local:ConstantHintControl}}">
+                </Binding>
+            </ninactrl:HintTextBox.Text>
+        </ninactrl:HintTextBox>
+        <TextBlock VerticalAlignment="Center"  Margin="0,-1,0,-3">
+            <TextBlock.Text>
+                <MultiBinding Converter="{StaticResource ec}" ConverterParameter="Hint">
+                    <Binding Path="Expr" RelativeSource="{RelativeSource AncestorType={x:Type local:ConstantHintControl}}" />
+                    <Binding Path="."/>
+                    <Binding Path="Valu" RelativeSource="{RelativeSource AncestorType={x:Type local:ConstantHintControl}}" />
+                    <Binding Path="Validate" RelativeSource="{RelativeSource AncestorType={x:Type local:ConstantHintControl}}"/>
+                    <Binding Path="Default" RelativeSource="{RelativeSource AncestorType={x:Type local:ConstantHintControl}}" />
+                    <Binding Path="Type" RelativeSource="{RelativeSource AncestorType={x:Type local:ConstantHintControl}}" />
+                </MultiBinding>
+            </TextBlock.Text>
+            <TextBlock.Foreground>
+                <MultiBinding Converter="{StaticResource vc}" ConverterParameter="Hint">
+                    <Binding Path="Expr" RelativeSource="{RelativeSource AncestorType={x:Type local:ConstantHintControl}}" />
+                    <Binding Path="." />
+                    <Binding Path="Valu" RelativeSource="{RelativeSource AncestorType={x:Type local:ConstantHintControl}}" />
+                </MultiBinding>
+            </TextBlock.Foreground>
+        </TextBlock>
+    </StackPanel>
+</UserControl>
+
+<!--<Binding
+                        Converter="{StaticResource CameraDefaultValueConverter}"
+                        Mode="OneWay"
+                        Path="Data.DefaultOffset"
+                        Source="{StaticResource CameraInfo}"
+                        UpdateSourceTrigger="PropertyChanged" />-->
+
+
+
+
+  

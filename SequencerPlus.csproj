@@ -1,0 +1,106 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows8.0</TargetFramework>
+    <OutputType>Library</OutputType>
+    <RootNamespace>NINA.Plugin.SequencerPlus</RootNamespace>
+    <AssemblyName>SequencerPlusPlugin</AssemblyName>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <UseWPF>true</UseWPF>
+    <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="localappdata\**" />
+    <Compile Remove="SequencerPlus\CVE - Copy\**" />
+    <EmbeddedResource Remove="localappdata\**" />
+    <EmbeddedResource Remove="SequencerPlus\CVE - Copy\**" />
+    <None Remove="localappdata\**" />
+    <None Remove="SequencerPlus\CVE - Copy\**" />
+    <Page Remove="localappdata\**" />
+    <Page Remove="SequencerPlus\CVE - Copy\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="SequencerPlus\ConstantsTemplates.xaml.cs" />
+    <Compile Remove="SequencerPlus\CVE\ExpressionConverter.cs" />
+    <Compile Remove="SequencerPlus\CVE\GlobalConstantView.xaml.cs" />
+    <Compile Remove="SequencerPlus\CVE\ISettable.cs" />
+    <Compile Remove="SequencerPlus\CVE\Runner.cs" />
+    <Compile Remove="SequencerPlus\CVE\RunnerInstruction.cs" />
+    <Compile Remove="SequencerPlus\CVE\ValidityConverter.cs" />
+    <Compile Remove="SequencerPlus\Expression.cs" />
+    <Compile Remove="SequencerPlus\IfResults.cs" />
+    <Compile Remove="SequencerPlus\Instructions\AutofocusAfterInstructions.cs" />
+    <Compile Remove="SequencerPlus\Instructions\IfSafe.cs" />
+    <Compile Remove="SequencerPlus\Instructions\IfSafeUnsafe.cs" />
+    <Compile Remove="SequencerPlus\Instructions\IfUnsafe.cs" />
+    <Compile Remove="SequencerPlus\Instructions\RunAutofocus.cs" />
+    <Compile Remove="SequencerPlus\Instructions\SequenceBlockView.xaml.cs" />
+    <Compile Remove="SequencerPlus\Instructions\SetVariable.cs" />
+    <Compile Remove="SequencerPlus\InterruptWait.cs" />
+    <Compile Remove="SequencerPlus\Obsolete\ConstantComboControl.xaml.cs" />
+    <Compile Remove="SequencerPlus\Obsolete\ConstantControl.xaml.cs" />
+    <Compile Remove="SequencerPlus\Obsolete\ConstantControlVariable.xaml.cs" />
+    <Compile Remove="SequencerPlus\Obsolete\ConstantExpression.cs" />
+    <Compile Remove="SequencerPlus\Obsolete\ConstantHintControl.xaml.cs" />
+    <Compile Remove="SequencerPlus\Obsolete\Retry.cs" />
+    <Compile Remove="SequencerPlus\PrependToLastImage.cs" />
+    <Compile Remove="SequencerPlus\Runner.cs" />
+    <Compile Remove="SequencerPlus\SetConstantView.xaml.cs" />
+    <Compile Remove="SequencerPlus\UserControl1.xaml.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="SequencerPlus\TakeExposure.cs.bak" />
+    <None Remove="SequencerPlus\TakeExposureNINA.cs.bak" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Remove="SequencerPlus\ConstantsTemplates.xaml" />
+    <Page Remove="SequencerPlus\CVE\CVC.xaml" />
+    <Page Remove="SequencerPlus\CVE\GlobalConstantView.xaml" />
+    <Page Remove="SequencerPlus\Instructions\SequenceBlockView.xaml" />
+    <Page Remove="SequencerPlus\Obsolete\ConstantComboControl.xaml" />
+    <Page Remove="SequencerPlus\Obsolete\ConstantControl.xaml" />
+    <Page Remove="SequencerPlus\Obsolete\ConstantControlVariable.xaml" />
+    <Page Remove="SequencerPlus\Obsolete\ConstantHintControl.xaml" />
+    <Page Remove="SequencerPlus\SetConstantView.xaml" />
+    <Page Remove="SequencerPlus\UserControl1.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="ReachFramework" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Printing" />
+    <Reference Include="System.Windows" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Antlr3.Runtime" Version="3.5.1" />
+    <PackageReference Include="Dirkster.AvalonDock" Version="4.60.0" />
+    <PackageReference Include="NCalcSync" Version="5.2.11" />
+    <PackageReference Include="NINA.Plugin" Version="3.2.0.9001" />
+    <PackageReference Include="Parlot" Version="1.0.2" />
+    <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
+    <PackageReference Include="System.Windows.Interactivity.WPF" Version="2.0.20525" />
+    <PackageReference Include="Microsoft.DotNet.UpgradeAssistant.Extensions.Default.Analyzers" Version="0.4.355802">
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Windows.Compatibility" Version="8.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Properties\Settings.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.Settings</DependentUpon>
+    </Compile>
+    <Compile Update="SequencerPlus\CVE\Obsolete\ConstantControlVariable.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="Properties\Settings.Settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <PropertyGroup />
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="&#xD;&#xA;if not exist &quot;%25localappdata%25\NINA\Plugins\3.0.0&quot; (&#xD;&#xA;  echo &quot;Creating $(PlatformName) Plugins folder&quot;&#xD;&#xA;  mkdir &quot;%25localappdata%25\NINA\Plugins\3.0.0&quot;&#xD;&#xA;)&#xD;&#xA;if not exist &quot;%25localappdata%25\NINA\Plugins\3.0.0\$(TargetName)&quot; (&#xD;&#xA;  echo &quot;Creating $(PlatformName) Plugins $(TargetName) folder&quot;&#xD;&#xA;  mkdir &quot;%25localappdata%25\NINA\Plugins\3.0.0\$(TargetName)&quot;&#xD;&#xA;)&#xD;&#xA;&#xD;&#xA;echo &quot;Copying $(PlatformName) $(TargetFileName)&quot;&#xD;&#xA;xcopy &quot;$(TargetPath)&quot; &quot;%25localappdata%25\NINA\Plugins\3.0.0\$(TargetName)&quot; /h/i/c/k/e/r/y&#xD;&#xA;xcopy &quot;$(TargetDir)NCalc.Sync.dll&quot; &quot;%25localappdata%25\NINA\Plugins\3.0.0\SequencerPlusPlugin&quot; /h/k/r/y&#xD;&#xA;xcopy &quot;$(TargetDir)NCalc.Core.dll&quot; &quot;%25localappdata%25\NINA\Plugins\3.0.0\SequencerPlusPlugin&quot; /h/k/r/y&#xD;&#xA;xcopy &quot;$(TargetDir)Parlot.dll&quot; &quot;%25localappdata%25\NINA\Plugins\3.0.0\SequencerPlusPlugin&quot; /h/k/r/y&#xD;&#xA;xcopy &quot;$(TargetDir)ExtendedNumerics.BigDecimal.dll&quot; &quot;%25localappdata%25\NINA\Plugins\3.0.0\SequencerPlusPlugin&quot; /h/k/r/y&#xD;&#xA;" />
+  </Target>
+</Project>

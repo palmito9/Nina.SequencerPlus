@@ -1,4 +1,4 @@
-﻿namespace WhenPlugin.When.Properties {
+﻿namespace NINA.Plugin.SequencerPlus.Properties {
     
     
     // This class allows you to handle specific events on the settings class:

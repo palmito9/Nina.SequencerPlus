@@ -1,4 +1,4 @@
-﻿# Sequencer Powerups — Community Recovery
+﻿# Sequencer+ — Community Recovery of Sequencer Powerups
 
 ## Introduction
 
@@ -44,15 +44,15 @@ The complete original branch set, including all 51 branches, is available in the
 
 ---
 
-## About Sequencer Powerups
+## About Sequencer+
 
-Sequencer Powerups is a powerful plugin for N.I.N.A.'s Advanced Sequencer that brings programmatic control to your imaging sequences. Where the built-in sequencer provides a fixed set of instructions with static parameters, Sequencer Powerups lets you introduce variables, expressions, constants, conditional logic, reusable functions, and dynamic triggers — turning your imaging sequence into something closer to a programmable automation script.
+Sequencer+ is the continuation of Sequencer Powerups under a new name — a clean break required to avoid conflicts with the original plugin. It is a powerful plugin for N.I.N.A.'s Advanced Sequencer that brings programmatic control to your imaging sequences. Where the built-in sequencer provides a fixed set of instructions with static parameters, Sequencer+ lets you introduce variables, expressions, constants, conditional logic, reusable functions, and dynamic triggers — turning your imaging sequence into something closer to a programmable automation script.
 
 It is particularly valuable for users who want to build sophisticated, reusable, and self-adapting sequences, especially for remote or unattended observatory operation.
 
 ### Variables and Constants
 
-At the heart of Sequencer Powerups is a variable system. You can define **Constants** (fixed key-value pairs) and **Variables** (values that can change during sequence execution) and reference them throughout your sequence using expressions. This means you can define exposure time or gain once at the top of your sequence, and have every instruction that needs it read from that single definition — no more hunting through dozens of instructions to change one value.
+At the heart of Sequencer+ is a variable system. You can define **Constants** (fixed key-value pairs) and **Variables** (values that can change during sequence execution) and reference them throughout your sequence using expressions. This means you can define exposure time or gain once at the top of your sequence, and have every instruction that needs it read from that single definition — no more hunting through dozens of instructions to change one value.
 
 ### Expressions
 
@@ -60,7 +60,7 @@ Most numeric parameters in enhanced instructions accept **Expressions** — math
 
 ### Enhanced Instructions
 
-Sequencer Powerups provides enhanced versions of many built-in NINA instructions, identified by a `+` suffix (e.g. `Smart Exposure+`, `Cool Camera+`, `Switch Filter+`, `Wait for Time+`, `Annotation+`). These enhanced versions accept Expressions in their parameter fields, allowing dynamic rather than static configuration. For example, `Cool Camera+` can set the target temperature from a variable rather than a hard-coded value.
+Sequencer+ provides enhanced versions of many built-in NINA instructions, identified by a `+` suffix (e.g. `Smart Exposure+`, `Cool Camera+`, `Switch Filter+`, `Wait for Time+`, `Annotation+`). These enhanced versions accept Expressions in their parameter fields, allowing dynamic rather than static configuration. For example, `Cool Camera+` can set the target temperature from a variable rather than a hard-coded value.
 
 ### Template by Reference
 
@@ -68,11 +68,11 @@ One of the most powerful features is **Template by Reference**, which turns NINA
 
 ### Functions
 
-Building on Template by Reference, Sequencer Powerups introduces **Functions**: templates that can be called with up to six arguments and can return a value by setting a variable. Functions can even be recursive. This makes it possible to build genuinely reusable logic, such as computing a value, making a decision, or encapsulating a complex multi-step procedure that varies based on input.
+Building on Template by Reference, Sequencer+ introduces **Functions**: templates that can be called with up to six arguments and can return a value by setting a variable. Functions can even be recursive. This makes it possible to build genuinely reusable logic, such as computing a value, making a decision, or encapsulating a complex multi-step procedure that varies based on input.
 
 ### Triggers
 
-Sequencer Powerups adds four new **Triggers** to complement NINA's built-in ones:
+Sequencer+ adds four new **Triggers** to complement NINA's built-in ones:
 
 - **When / When Becomes Unsafe** — unlike standard NINA triggers which only fire between instructions, these react within seconds of a safety condition changing, enabling rapid response to weather or observatory safety events.
 - **DIY Trigger** — lets you separate the *condition* of an existing trigger from its *action*, so you can reuse a trigger's detection logic while substituting your own response instructions.

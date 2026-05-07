@@ -15,10 +15,10 @@ permissions:
 
 env:
   # Adjust this to your plugin title
-  PLUGIN_NAME: "When"
-  PLUGIN_SLN_NAME: "When"
-  PLUGIN_DLL_NAME: "WhenPlugin"
-  PLUGIN_MANIFEST_PATH: "w/When/3.0.0/manifest.${{ github.ref_name }}.json"
+  PLUGIN_NAME: "SequencerPlus"
+  PLUGIN_SLN_NAME: "SequencerPlus"
+  PLUGIN_DLL_NAME: "SequencerPlusPlugin"
+  PLUGIN_MANIFEST_PATH: "w/SequencerPlus/3.0.0/manifest.${{ github.ref_name }}.json"
 
 jobs:
   build-and-release:
