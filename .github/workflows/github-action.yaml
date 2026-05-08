@@ -21,7 +21,7 @@ env:
   PLUGIN_NAME: "Sequencer+"
   PLUGIN_SLN_NAME: "SequencerPlus"
   PLUGIN_DLL_NAME: "NINA.Plugin.SequencerPlus"
-  PLUGIN_MANIFEST_PATH: "m/SequencerPlus"
+  PLUGIN_MANIFEST_PATH: "s/SequencerPlus"
 
 jobs:
   build-and-release:
