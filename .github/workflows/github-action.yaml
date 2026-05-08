@@ -39,13 +39,14 @@ jobs:
       - name: Build .NET Assemblies
         run: |
           dotnet restore
-          dotnet build "${{ env.PLUGIN_SLN_NAME }}.sln" -c Release -p:PostBuildEvent= -p:Version=${{ github.ref_name }} -o ./bin/Release
+          dotnet build "${{ env.PLUGIN_SLN_NAME }}.sln" -c Release -p:PostBuildEvent= -p:Version=${{ github.ref_name }}
 
 
       # Add all necessary files that the plugin needs to the packages folder - basically all items that are normally in your post build event on your local builds
       - name: Prepare package
         run: |
           Copy-Item "bin/Release/net8.0-windows8.0/${{ env.PLUGIN_DLL_NAME }}.dll" "packages/${{ env.PLUGIN_NAME }}/${{ env.PLUGIN_DLL_NAME }}.dll" -Force
+          Copy-Item "bin/Release/net8.0-windows8.0/${{ env.PLUGIN_DLL_NAME }}.pdb" "packages/${{ env.PLUGIN_NAME }}/${{ env.PLUGIN_DLL_NAME }}.pdb" -Force
           Copy-Item "bin/Release/net8.0-windows8.0/NCalc.Sync.dll" "packages/${{ env.PLUGIN_NAME }}/NCalc.Sync.dll" -Force
           Copy-Item "bin/Release/net8.0-windows8.0/NCalc.Core.dll" "packages/${{ env.PLUGIN_NAME }}/NCalc.Core.dll" -Force
           Copy-Item "bin/Release/net8.0-windows8.0/Parlot.dll" "packages/${{ env.PLUGIN_NAME }}/Parlot.dll" -Force
@@ -56,8 +57,6 @@ jobs:
           Copy-Item "bin/Release/net8.0-windows8.0/Microsoft.Extensions.Logging.Console.dll" "packages/${{ env.PLUGIN_NAME }}/Microsoft.Extensions.Logging.Console.dll" -Force
           Copy-Item "bin/Release/net8.0-windows8.0/Microsoft.Extensions.Logging.TraceSource.dll" "packages/${{ env.PLUGIN_NAME }}/Microsoft.Extensions.Logging.TraceSource.dll" -Force
           Copy-Item "bin/Release/net8.0-windows8.0/Microsoft.Extensions.Options.dll" "packages/${{ env.PLUGIN_NAME }}/Microsoft.Extensions.Options.dll" -Force
-          Copy-Item "bin/Release/${{ env.PLUGIN_DLL_NAME }}.dll" "packages/${{ env.PLUGIN_NAME }}/${{ env.PLUGIN_DLL_NAME }}.dll" -Force
-          Copy-Item "bin/Release/${{ env.PLUGIN_DLL_NAME }}.pdb" "packages/${{ env.PLUGIN_NAME }}/${{ env.PLUGIN_DLL_NAME }}.pdb" -Force          
           
       - name: Create Plugin archives and manifests
         run: |
