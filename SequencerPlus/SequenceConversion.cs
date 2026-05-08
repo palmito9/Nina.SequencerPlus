@@ -17,19 +17,19 @@ namespace NINA.Plugin.SequencerPlus {
             RegexOptions.Compiled);
 
         private static readonly Regex ToPowerupsPattern = new Regex(
-            @"NINA\.Plugin\.SequencerPlus\.([^,""]+),\s*SequencerPlusPlugin",
+            @"NINA\.Plugin\.SequencerPlus\.([^,""]+),\s*NINA\.Plugin\.SequencerPlus",
             RegexOptions.Compiled);
 
         public static bool NeedsConversion(string content, Direction direction) {
             return direction == Direction.ToSequencerPlus
                 ? content.Contains("WhenPlugin")
-                : content.Contains("SequencerPlusPlugin");
+                : content.Contains("NINA.Plugin.SequencerPlus");
         }
 
         public static string Convert(string content, Direction direction) {
             if (direction == Direction.ToSequencerPlus) {
                 return ToSequencerPlusPattern.Replace(content,
-                    m => $"NINA.Plugin.SequencerPlus.{m.Groups[1].Value.Trim()}, SequencerPlusPlugin");
+                    m => $"NINA.Plugin.SequencerPlus.{m.Groups[1].Value.Trim()}, NINA.Plugin.SequencerPlus");
             } else {
                 return ToPowerupsPattern.Replace(content,
                     m => $"WhenPlugin.When.{m.Groups[1].Value.Trim()}, WhenPlugin");
