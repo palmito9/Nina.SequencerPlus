@@ -454,6 +454,10 @@ namespace NINA.Plugin.SequencerPlus {
                     i.AddRange(spsw.Issues);
                 }
 
+                if (dither == null) {
+                    return false;
+                }
+
                 if (dither.AfterExposures > 0) {
                     valid = dither.Validate() && valid;
                     i.AddRange(dither.Issues);

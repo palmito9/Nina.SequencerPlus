@@ -1,39 +1,43 @@
-﻿using NINA.Plugin.SequencerPlus.Properties;
+﻿using Accord.Collections;
+using Microsoft.Win32;
+using Namotion.Reflection;
 using NINA.Core.Model;
 using NINA.Core.Utility;
+using NINA.Equipment.Interfaces.Mediator;
+using NINA.Equipment.Model;
 using NINA.Image.ImageData;
 using NINA.Plugin;
 using NINA.Plugin.Interfaces;
+using NINA.Plugin.SequencerPlus;
+using NINA.Plugin.SequencerPlus.Properties;
+using NINA.Plugin.SequencerPlus.ViewModels;
 using NINA.Profile;
 using NINA.Profile.Interfaces;
+using NINA.Sequencer.Container;
+using NINA.Sequencer.Interfaces.Mediator;
+using NINA.Sequencer.Mediator;
+using NINA.Sequencer.SequenceItem;
+using NINA.ViewModel.Sequencer;
 using NINA.WPF.Base.Interfaces.Mediator;
 using NINA.WPF.Base.Interfaces.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
+using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Reflection;
+using System.Reflection.Metadata;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
-using Settings = NINA.Plugin.SequencerPlus.Properties.Settings;
-using System.Reflection.Metadata;
-using NINA.Plugin.SequencerPlus;
-using NINA.Sequencer.Container;
-using Namotion.Reflection;
-using System.Reflection;
-using System.Drawing;
-using System.Windows.Media;
 using System.Windows;
-using NINA.Equipment.Interfaces.Mediator;
+using System.Windows.Forms;
 using System.Windows.Input;
-using System.IO;
-using NINA.Sequencer.Interfaces.Mediator;
-using Accord.Collections;
-using NINA.Sequencer.SequenceItem;
-using NINA.Sequencer.Mediator;
-using NINA.ViewModel.Sequencer;
-using NINA.Equipment.Model;
+using System.Windows.Media;
+using Settings = NINA.Plugin.SequencerPlus.Properties.Settings;
 
 namespace NINA.Plugin.SequencerPlus {
     /// <summary>
@@ -72,13 +76,13 @@ namespace NINA.Plugin.SequencerPlus {
             ProfileService = profileService;
             // React on a changed profile
             profileService.ProfileChanged += ProfileService_ProfileChanged;
-            
+
             // Add image data variables
             imagingMediator.ImagePrepared += TakeExposure.ProcessResults;
 
             SequenceMediator = sequenceMediator;
             FilterWheelMediator = filterWheelMediator;
-            
+
             // Hook into image saving for adding FITS keywords or image file patterns
             Symbol.SequencerPlusPluginObject = this;
             Symbol.InitMediators(switchMediator, weatherDataMediator, cameraMediator, domeMediator, flatMediator, filterWheelMediator, profileService,
@@ -88,6 +92,9 @@ namespace NINA.Plugin.SequencerPlus {
             imageSaveMediator.BeforeFinalizeImageSaved += ImageSaveMediator_BeforeFinalizeImageSaved;
 
             OpenRoofFilePathDiagCommand = new RelayCommand(OpenRoofFilePathDiag);
+
+            // Initialize conversion view model
+            Conversion = new ConversionViewModel(profileService);
 
         }
 
@@ -775,5 +782,8 @@ namespace NINA.Plugin.SequencerPlus {
         protected void RaisePropertyChanged([CallerMemberName] string propertyName = null) {
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        public ConversionViewModel Conversion { get; private set; }
+
     }
 }
