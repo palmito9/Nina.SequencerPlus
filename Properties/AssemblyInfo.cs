@@ -3,8 +3,8 @@ using System.Runtime.InteropServices;
 
 [assembly: Guid("9bb66de3-b145-433c-b07b-1c432454817a")]
 
-[assembly: AssemblyVersion("3.29.0.11")]
-[assembly: AssemblyFileVersion("3.29.0.11")]
+[assembly: AssemblyVersion("3.29.0.12")]
+[assembly: AssemblyFileVersion("3.29.0.12")]
 
 [assembly: AssemblyTitle("Sequencer+")]
 [assembly: AssemblyDescription("Advanced Sequencer on steroids.\n" +

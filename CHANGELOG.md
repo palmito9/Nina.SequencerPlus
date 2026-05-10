@@ -1,5 +1,16 @@
 ﻿# Sequencer+ — Changelog
 
+## 3.29.0.12 — 2026-05-10
+
+**Bug fixes**
+
+- Fixed: Variable and Constant instructions can now be dropped directly into a Constant/Variable Container (drag-and-drop was previously rejected).
+- Fixed: Long text in the plugin options panel now wraps correctly instead of overflowing.
+
+Documentation is now available at [elveteek.ch/nina-plugins/sequencer-plus](https://elveteek.ch/nina-plugins/sequencer-plus).
+
+---
+
 ## 3.29.0.11 — 2026-05-08
 
 **Bug fix**
