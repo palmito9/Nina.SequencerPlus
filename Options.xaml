@@ -13,13 +13,13 @@
     <DataTemplate x:Key="Sequencer+_Options">
         <StackPanel Orientation="Vertical">
 
-            <TextBlock Margin="0,0,0,10">
+            <TextBlock Margin="0,0,0,10" TextWrapping="Wrap">
                 <TextBlock.Inlines>
                     <Run FontWeight="Bold" FontSize="13pt"  Text="Convert Powerups sequences and templates" />
                 </TextBlock.Inlines>
             </TextBlock>
 
-            <TextBlock Margin="0,0,0,10" FontStyle="Italic" xml:space="preserve">This section allows to convert sequences, targets and templates between the Powerups format and the Sequencer+ format.
+            <TextBlock Margin="0,0,0,10" FontStyle="Italic" xml:space="preserve" TextWrapping="Wrap">This section allows to convert sequences, targets and templates between the Powerups format and the Sequencer+ format.
 You can convert individual files or all files contained in a folder, including subfolders or not (note that looking into subfolders is disabled by default).
 
 ⚠️This has been thouroughly tested and you may revert by converting the other way, but it is always a good idea to have a backup of your NINA folder.
@@ -71,7 +71,7 @@ You can convert individual files or all files contained in a folder, including s
                 <!--</Border>-->
             </StackPanel>
 
-            <TextBlock Margin="0,0,0,10">
+            <TextBlock Margin="0,0,0,10" TextWrapping="Wrap">
                 <TextBlock.Inlines>
                     <Run FontWeight="Bold" FontSize="13pt"  Text="Global Constants (applicable in any Constant expression). Note that these are optionally per profile!" />
                 </TextBlock.Inlines>

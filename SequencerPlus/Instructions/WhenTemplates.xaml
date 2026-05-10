@@ -2520,8 +2520,8 @@
                               Visibility="{Binding Items.Count, Converter={StaticResource InverseZeroToVisibilityConverter}}" />
                             <i:Interaction.Behaviors>
                                 <behaviors:DragOverBehavior DragAboveSize="0" DragBelowSize="0" />
-                                <behaviors:DropIntoBehavior AllowedDragDropTypesString="NINA.Plugin.SequencerPlus.SetConstant, SequencerPlusPlugin, Culture=neutral, PublicKeyToken=null;
-NINA.Plugin.SequencerPlus.SetVariable, SequencerPlusPlugin, Culture=neutral, PublicKeyToken=null;NINA.Sequencer.SequenceItem.Utility.Annotation" OnDropCommand="DropIntoCommand"/>
+                                <behaviors:DropIntoBehavior AllowedDragDropTypesString="NINA.Plugin.SequencerPlus.SetConstant, NINA.Plugin.SequencerPlus, Culture=neutral, PublicKeyToken=null;
+NINA.Plugin.SequencerPlus.SetVariable, NINA.Plugin.SequencerPlus, Culture=neutral, PublicKeyToken=null;NINA.Sequencer.SequenceItem.Utility.Annotation" OnDropCommand="DropIntoCommand"/>
                             </i:Interaction.Behaviors>
                         </Grid>
                     </Border>
